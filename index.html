@@ -73,7 +73,7 @@ const players=[
 // PDF 원본 일차별 경기 번호 범위. 명칭은 원문에서 확인된 항목만 표기합니다.
 // 공식 대진표는 시간표가 아니라 경기 순서/조 편성 자료입니다.
 const byDay=[
-  Array.from({length:43},(_,i)=>i+1),
+  Array.from({length:44},(_,i)=>i+1),
   Array.from({length:66},(_,i)=>i+45),
   Array.from({length:38},(_,i)=>i+111),
   Array.from({length:12},(_,i)=>i+151)
@@ -88,7 +88,7 @@ const titles={
   29:'남자 일반부 DTT200m 예선',30:'여자 초등부(1,2학년) 400m 결승',
   31:'여자 중등부 EP2,000m 결승',32:'남자 중등부 EP2,000m 결승',
   33:'남자 중등부 EP2,000m 결승',34:'남자 고등부 EP2,000m 결승',
-  38:'남자 중등부 DTT200m 결승',40:'남자 고등부 DTT200m 결승',
+  38:'여자 중등부 DTT200m 결승',39:'남자 중등부 DTT200m 결승',40:'남자 고등부 DTT200m 결승',41:'여자 대학부 DTT200m 결승',42:'남자 대학부 DTT200m 결승',43:'여자 일반부 DTT200m 결승',44:'남자 일반부 DTT200m 결승',
   45:'남자 중등부 DTT200m 결승',46:'여자 초등부(5,6학년) 1,000m 예선',47:'남자 초등부(5,6학년) 1,000m 예선',
   48:'여자 초등부(3,4학년) 1,000m 예선',49:'남자 초등부(3,4학년) 1,000m 예선',
   58:'여자 초등부(5,6학년) 1,000m 결승',59:'여자 중등부 1,000m 예선',
@@ -117,7 +117,7 @@ const titles={
   159:'남자 고등부 P2,000m 결승',160:'남자 대학부 P2,000m 결승',
   161:'남자 일반부 P2,000m 결승',162:'남자 일반부 P2,000m 결승'
 };
-const teamEvents={28:['백민혁'],31:['김가현'],32:['신의재','김서후'],38:['백민혁'],40:['이희륜']};
+const teamEvents={28:['백민혁'],31:['김가현'],32:['신의재','김서후'],39:['백민혁'],40:['이희륜']};
 let starred=[];try{starred=JSON.parse(localStorage.getItem('ssc261030-stars')||'[]')}catch(e){}
 let filter='all',query='',selected=null,mode='track',day=0;
 const $=s=>document.querySelector(s);
@@ -137,7 +137,7 @@ root.append(el('p','note', '트랙 '+(day+1)+'일차 · '+(showAll?'전체 경�
 if(!ids.length){root.append(el('div','subtle','현재 확보된 PDF의 이 날짜 선수별 출전 명단과 팀 종목을 자동으로 매칭할 수 없습니다. 전체 일정 스위치를 켜 원본 경기번호 목록을 볼 수 있습니다.'));return}
 for(const n of ids){const team=teamEvents[n];const row=el('div','event'+(team?' team':''));const number=el('div','number',n+'번');row.append(number);
 const body=el('div','detail');body.append(el('strong','',titles[n]||'종목명 대조 필요'));
-body.append(el('small','',team?'우리 팀: '+team.join(' · '):'대진표의 경기번호 · 종목/조 정보 확인 필요'));row.append(body);
+body.append(el('small','',team?'우리 팀: '+team.join(' · '):'대진표 경기번호 · 종목/조 대조 필요'));row.append(body);
 if(team)row.append(el('span','tag','우리 팀'));root.append(row)}
 root.append(el('p','note','※ 전체 번호는 원본 PDF 인쇄 순서를 토대로 한 임시 색인입니다. 실제 원문에는 결번/중복 및 예선·결승 구분이 있으므로 공식 대진표와 대조해야 합니다. 선수 하이라이트는 검증된 일부 경기만 표시했습니다.'))}
 $('#showall').addEventListener('change',renderCalendar);
