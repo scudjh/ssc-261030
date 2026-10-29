@@ -1,174 +1,370 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101d34"><title>서울스포츠클럽 | 제천컵 경기노트</title>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울스포츠클럽 출전 경기 확인</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#162840;background:#f3f6fa}
-*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}
-header{background:linear-gradient(125deg,#11213c,#214d82);color:#fff;padding:18px max(20px,calc((100vw - 1050px)/2)) 84px}
-.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:1.5px;color:#c4ddf5}
-.top a{text-decoration:none;border:1px solid #ffffff50;border-radius:99px;padding:7px 12px}
-h1{font-size:clamp(34px,6vw,58px);line-height:1.15;margin:38px 0 12px;letter-spacing:-2px}h1 em{font-style:normal;color:#92d6ff}
-header p{color:#dae6f4;line-height:1.7;margin:3px 0}
-main{max-width:1050px;margin:-57px auto 70px;padding:0 17px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-.stat,.panel{background:white;border-radius:19px;box-shadow:0 7px 28px #13284712}
-.stat{padding:18px}.stat strong{display:block;font-size:27px}.stat span{color:#6e8095;font-size:12px}
-.panel{padding:22px;margin:18px 0}h2{font-size:22px;letter-spacing:-.6px;margin:0 0 15px}
-.row,.tabs{display:flex;gap:8px;flex-wrap:wrap}.row{align-items:center;justify-content:space-between;margin-bottom:14px}
-button{border:0}.pill{border-radius:22px;border:1px solid #d8e1ee;background:#f7f9fd;color:#364b69;padding:10px 15px}
-.pill.active{background:#183f73;border-color:#183f73;color:white}
-.search{border:1px solid #d8e1ee;border-radius:12px;padding:12px 14px;width:100%;margin:2px 0 15px;outline-color:#2f77b8}
-.athletes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
-.athlete{border:1px solid #e4ebf2;border-radius:14px;padding:13px;display:flex;align-items:center;gap:11px}
-.avatar{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#eaf4ff;color:#2762a1;font-weight:800}
-.athlete .info{flex:1;min-width:0}.athlete strong{display:block;font-size:15px}.athlete small{color:#718094;display:block;font-size:12px;margin-top:3px}
-.star{border-radius:11px;background:#f3f6fb;font-size:20px;width:37px;height:37px;color:#9daac0}.star.on{color:#e5a321;background:#fff3d6}
-.note{font-size:12px;color:#76869a;line-height:1.7;margin:12px 0 0}
-.days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 20px}
-.day{border:1px solid #dce5ef;border-radius:12px;background:white;padding:12px 3px;text-align:center;font-weight:700}
-.day small{display:block;font-weight:400;color:#8797aa;font-size:10px;margin-bottom:5px}.day.active{background:#183f73;color:white}.day.active small{color:#b9d9f8}
-.event{cursor:pointer}.event:focus-visible{outline:3px solid #2268ad;outline-offset:2px}.event.team{background:#e5f3ff;border-color:#52a2e6;box-shadow:inset 4px 0 #2268ad}.event.team .number{background:#2268ad;color:#fff}.event{border:1px solid #e4ebf2;border-radius:13px;padding:14px;margin:10px 0;display:flex;align-items:center;gap:14px}
-.number{width:53px;min-width:53px;text-align:center;background:#eef5fc;color:#245a96;border-radius:10px;padding:10px 4px;font-weight:850;font-size:14px}
-.number small{display:block;font-size:10px;font-weight:400}.event .detail{flex:1}.event strong{font-size:15px}.event .detail small{display:block;color:#738198;margin-top:4px}
-.tag{font-size:11px;padding:5px 8px;border-radius:30px;background:#fff2dc;color:#986010;white-space:nowrap}
-.subtle{background:#f3f7fc;color:#596d85;border-radius:12px;padding:14px;line-height:1.65;font-size:13px}
-.events-per{margin-top:10px;border-bottom:1px solid #e7edf4;padding:12px 0}.events-per strong{font-size:15px}.events-per p{font-size:13px;line-height:1.75;color:#566b82;margin:5px 0}.mode{margin:0 0 12px}
-footer{text-align:center;font-size:12px;color:#8090a4;padding:22px 15px}
-@media(max-width:600px){.panel{padding:16px}.stats{gap:7px}.stat{padding:14px 11px}.stat strong{font-size:23px}.days{gap:5px}.day{font-size:12px}.event{gap:9px;padding:11px}.number{width:42px;min-width:42px}}
-</style></head>
+:root{
+  --bg:#EDF0F3; --surface:#FFFFFF; --ink:#111C2B; --muted:#5D6B7A;
+  --line:#D6DCE3; --cobalt:#1C4FD7; --cobalt-deep:#12328A;
+  --bib:#FFD941; --bib-soft:#FFF4C2;
+  --num:'Chakra Petch',monospace; --body:'IBM Plex Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+button:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+
+/* ---------- header ---------- */
+header.masthead{background:var(--cobalt-deep);color:#fff;padding:22px 18px 18px}
+.masthead .eyebrow{font-family:var(--num);font-weight:600;font-size:11px;letter-spacing:.14em;color:#9FB6F5;text-transform:uppercase;margin-bottom:8px}
+.masthead h1{font-size:24px;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.masthead h1 .club{background:var(--bib);color:var(--ink);padding:1px 8px;border-radius:6px;display:inline-block}
+.masthead .meta{margin-top:10px;font-size:13px;color:#C7D4F3}
+.stats{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:8px 12px;min-width:82px}
+.stat b{display:block;font-family:var(--num);font-weight:700;font-size:20px;line-height:1.1}
+.stat span{font-size:11px;color:#B9C8EE}
+
+/* ---------- filters ---------- */
+.filters{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0 0}
+.tabrow{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:0 14px 10px}
+.tab{font-family:var(--num);font-weight:600;font-size:12.5px;line-height:1.15;padding:7px 2px 6px;border-radius:11px;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);text-align:center;white-space:nowrap;min-width:0}
+.tab small{display:block;font-family:var(--body);font-weight:500;font-size:9.5px;opacity:.7;margin-top:2px;letter-spacing:0}
+.tab[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+@media (min-width:480px){.tab{font-size:13px;padding:8px 2px 7px}.tab small{font-size:10.5px}}
+/* 선수 필터 (접이식) */
+.whobar{display:flex;align-items:center;gap:8px;padding:0 14px 12px}
+.whotoggle{flex:1;display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:9px 13px;text-align:left}
+.whotoggle .lab{color:var(--muted);font-size:12px;flex:0 0 auto}
+.whotoggle .val{font-weight:700}
+.whotoggle .val .b{font-family:var(--num);font-weight:700;font-size:11px;background:var(--ink);color:#fff;border-radius:5px;padding:1px 5px;margin-right:5px}
+.whotoggle .caret{margin-left:auto;color:var(--muted);transition:transform .15s}
+.whotoggle[aria-expanded="true"] .caret{transform:rotate(180deg)}
+.whotoggle.active{border-color:var(--ink);background:var(--bib-soft)}
+.whoclear{flex:0 0 auto;font-size:12px;font-weight:700;color:var(--muted);border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 12px}
+.whopanel{display:none;padding:0 14px 12px}
+.whopanel.open{display:block}
+.whogrid{display:flex;flex-wrap:wrap;gap:6px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px}
+.whogrid .grp{flex-basis:100%;font-family:var(--num);font-weight:600;font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin:4px 2px 0}
+.chip{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;padding:6px 11px 6px 7px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.chip .b{font-family:var(--num);font-weight:700;font-size:11px;background:var(--ink);color:#fff;border-radius:5px;padding:1px 5px;min-width:24px;text-align:center}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--bib)}
+.chip.all .b{background:var(--cobalt)}
+
+/* ---------- day section ---------- */
+main{max-width:760px;margin:0 auto;padding:14px 14px 60px}
+.daytitle{display:flex;align-items:baseline;gap:10px;margin:24px 2px 12px}
+.daytitle:first-child{margin-top:8px}
+.daytitle .d{font-family:var(--num);font-weight:700;font-size:15px;color:var(--cobalt)}
+.daytitle .dt{font-size:14px;font-weight:700}
+.daytitle .cnt{font-size:12px;color:var(--muted);margin-left:auto}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;padding-left:16px}
+.tl::before{content:"";position:absolute;left:4px;top:6px;bottom:6px;width:2px;background:var(--line);border-radius:2px}
+.tl>*{position:relative;margin-bottom:10px}
+.tl>*::before{content:"";position:absolute;left:-16px;top:14px;width:8px;height:8px;border-radius:50%;background:var(--line)}
+.tl>.card::before{background:var(--cobalt);box-shadow:0 0 0 3px #D9E2FB}
+.tl>.mark::before{background:#B6C0CC}
+/* 워밍업/휴식/점심 마커 */
+.mark{display:flex;align-items:center;gap:8px;font-family:var(--num);font-weight:600;font-size:11.5px;letter-spacing:.22em;color:var(--muted);padding:6px 2px}
+.mark::after{content:"";flex:1;border-top:1.5px dashed #C4CCD6}
+.mark.rest{color:#B4632A}
+.mark.rest::before{background:#E8A265}
+.mark.fin{letter-spacing:.06em;font-family:var(--body);font-weight:700;font-size:12.5px;color:var(--cobalt-deep)}
+.mark.fin::before{background:var(--cobalt-deep)}
+/* 건너뛴 경기 */
+.skip{font-size:12px;color:#8A96A3;padding:2px 2px}
+.skip b{font-family:var(--num);font-weight:600;color:#6E7B89}
+/* 명단 미게재 (참고) 경기 */
+.refcard{background:#F4F6F9;border:1.5px dashed #C4CCD6;border-radius:12px;padding:10px 12px;display:flex;gap:11px;align-items:flex-start}
+.refcard::before{background:#C4CCD6}
+.refcard .rno{font-family:var(--num);font-weight:700;font-size:14px;color:var(--cobalt);flex:0 0 auto;border:1.5px dashed #AEB9C6;border-radius:7px;padding:4px 7px;background:#fff}
+.refcard .rt{font-size:13.5px;font-weight:700;line-height:1.35}
+.refcard .rwho{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* ---------- event card ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(17,28,43,.05)}
+.card>.head{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line)}
+.plate{flex:0 0 auto;font-family:var(--num);font-weight:700;font-size:19px;line-height:1;background:#fff;border:2px solid var(--ink);border-radius:8px;padding:8px 0;width:52px;text-align:center;box-shadow:2.5px 2.5px 0 var(--bib)}
+.plate small{display:block;font-size:8.5px;font-weight:600;letter-spacing:.12em;color:var(--muted);margin-bottom:3px}
+.head .ttl{font-size:15px;font-weight:700;line-height:1.35}
+.head .sub{font-size:12px;color:var(--muted);margin-top:2px}
+.heat{padding:10px 14px 4px}
+.heat+.heat{border-top:1px dashed var(--line)}
+.heat .hlabel{display:inline-block;font-family:var(--num);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--cobalt);border:1.5px solid var(--cobalt);border-radius:6px;padding:2px 8px;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+td{padding:6px 4px;font-size:14px;vertical-align:middle;border-top:1px solid #EEF1F5}
+tr:first-child td{border-top:none}
+td.bib{width:44px}
+td.bib .n{display:inline-block;font-family:var(--num);font-weight:700;font-size:13px;border:1.5px solid var(--line);border-radius:6px;background:#fff;min-width:34px;text-align:center;padding:2px 0;color:var(--muted)}
+td.nm{font-weight:500}
+td.tm{color:var(--muted);font-size:13px}
+td.gr{width:40px;text-align:right;font-family:var(--num);font-weight:600;font-size:12px;color:var(--muted)}
+tr.me{background:var(--bib-soft)}
+tr.me td{border-top-color:#F2E3A0}
+tr.me td.bib .n{background:var(--bib);border-color:var(--ink);color:var(--ink)}
+tr.me td.nm{font-weight:700}
+tr.me td.nm .tag{font-size:10px;font-weight:700;color:var(--cobalt-deep);background:#E4EBFF;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+/* relay */
+.rteam{border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin-bottom:8px}
+.rteam.me{background:var(--bib-soft);border-color:#E7CE58}
+.rteam .rt2{display:flex;align-items:baseline;gap:8px}
+.rteam .rt2 .rg{font-family:var(--num);font-weight:700;font-size:12px;color:var(--muted)}
+.rteam .rt2 .rn{font-weight:700;font-size:14px}
+.rteam .rt2 .rb{margin-left:auto;font-family:var(--num);font-size:11.5px;color:var(--muted)}
+.rteam table{margin:8px 0 2px}
+
+.empty{padding:40px 10px;text-align:center;color:var(--muted);font-size:14px}
+footer.note{max-width:760px;margin:0 auto;padding:0 16px 46px;font-size:12px;color:var(--muted);line-height:1.7}
+footer.note b{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (min-width:640px){.masthead h1{font-size:28px}}
+</style>
+</head>
 <body>
-<header><div class="top"><span>2026 JECHEON CUP · SSC</span><a href="https://seoul-roller-jecheon-2026.astein.chatgpt.site" target="_blank" rel="noopener">기존 사이트 ↗</a></div>
-<h1>우리 팀 경기,<br><em>한눈에.</em></h1>
-<p>제2회 제천컵 롤러 종합선수권대회<br><strong>서울스포츠클럽 경기노트</strong></p>
-<p>10.30 금 — 11.02 월 · 제천실내롤러경기장</p></header>
-<main>
-<div class="stats"><div class="stat"><strong>10명</strong><span>함께 응원할 선수</span></div><div class="stat"><strong>4일</strong><span>대회 기간</span></div><div class="stat"><strong>2종</strong><span>트랙 / 로드</span></div></div>
-<section class="panel"><div class="row"><h2>선수 선택</h2><button id="reset" class="pill">선택 초기화</button></div>
-<input class="search" id="search" placeholder="⌕  선수 이름 검색" aria-label="선수 이름 검색">
-<div class="tabs" id="filter"><button class="pill active" data-filter="all">전체 선수</button><button class="pill" data-filter="star">☆ 관심 선수</button></div>
-<div class="athletes" id="athletes" style="margin-top:14px"></div>
-<p class="note">☆ 관심 선수는 이 기기에 저장됩니다. 선수를 누르면 아래에서 해당 선수의 종목을 볼 수 있습니다.</p></section>
-<section class="panel"><div class="row"><h2>경기 일정</h2><span class="tag">스캔 대진표 · 부분 전사</span></div><div class="tabs" id="viewstyles" style="margin:0 0 12px"><button class="pill active" data-view="schedule">대회 일정별 보기</button><button class="pill" data-view="category">대회 종목별 보기</button></div>
-<div class="tabs mode" id="modes"><button class="pill active" data-mode="track">트랙</button><button class="pill" data-mode="road">로드</button></div>
-<label class="subtle" style="display:flex;align-items:center;gap:12px;margin:12px 0;cursor:pointer"><input type="checkbox" id="showall" style="width:20px;height:20px;accent-color:#2268ad"> <span><strong>전체 일정 보기</strong><br><small>켜면 전체 경기를 표시하고, 우리 팀 경기를 파란색으로 강조합니다.</small></span></label><div class="days" id="days"></div><div id="calendar"></div><div id="categories" hidden></div></section>
-<section class="panel"><h2>선수별 참가 종목</h2><div id="entries"></div><p class="note">참가 종목은 제공된 팀 명단을 기준으로 표시합니다. 실제 배정된 일자, 경기번호, 조 편성은 공식 대진표를 우선해 주세요.</p></section>
-<section class="panel"><h2>원본 대진표 안내</h2><div class="subtle">현재 이 복구판에는 원본 대진표 PDF 링크가 포함되지 않았습니다. 정확한 경기번호·일자·조 편성을 확인하려면 공식 원본을 대조해야 합니다. 이전에 확인된 10월 30일 트랙 경기번호 일부만 아래에 참고용으로 표시합니다. 이 페이지는 공식 경기 운영 안내가 아닙니다.</div></section>
-<footer>SEOUL SPORTS CLUB · ROLL TOGETHER, GROW TOGETHER.<br>팀 응원을 위한 비공식 경기노트 · 현장 공지 우선</footer>
-</main>
+<header class="masthead">
+  <div class="eyebrow">2026 제2회 제천컵 롤러 종합선수권대회 스피드 트랙대회</div>
+  <h1><span class="club">서울스포츠클럽</span> 출전 경기 안내</h1>
+  <div class="meta">2026년 10월 30일(금) ~ 11월 2일(월) · 트랙 조편성 명단 기준</div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="filters">
+  <div class="tabrow" id="dayTabs" role="group" aria-label="일차 선택"></div>
+  <div class="whobar">
+    <button class="whotoggle" id="whoToggle" aria-expanded="false" aria-controls="whoPanel">
+      <span class="lab">선수 필터</span><span class="val" id="whoVal">전체 선수</span><span class="caret">▾</span>
+    </button>
+    <button class="whoclear" id="whoClear" hidden>해제</button>
+  </div>
+  <div class="whopanel" id="whoPanel"><div class="whogrid" id="whoGrid"></div></div>
+</div>
+
+<main id="app"></main>
+
+<footer class="note">
+  <b>참고</b> · 워밍업, 휴식, 점심시간과 일차 종료(시상식)는 원문 프로그램 순서 그대로 표시했으며,
+  서울스포츠클럽 선수가 없는 경기는 "경기 N~M 진행"으로 줄여 표기했습니다.
+  배번 뒤 숫자는 학년입니다(초등부 → 초, 중등부 → 중).
+  점선 카드는 예선 결과에 따라 진출자가 정해지는 경기로, 원문에 명단이 없어 경기명만 표시했습니다.
+  이희륜 선수는 서울스포츠클럽 소속이나 대회에는 중경고등학교 소속으로 출전하여 원문 표기(중경고등학교)를 유지한 채 클럽 선수로 강조했습니다.
+  원문에는 9번, 62번, 104번이 두 번씩 인쇄되어 있어 순서에 따라 10번, 63번, 106번으로 보정했습니다(63번 남자 중등부 P5,000m 결승은 원문에 "62 여자 중등부"로 표기).
+  158번 계주는 원문에 팀명만 있고 주자 배번이 없어, 주자는 클럽 팀 명단(신의재, 백민혁, 김서후)을 기준으로 표시했습니다.
+  로드 경기는 이번 자료에 포함되지 않았습니다.
+</footer>
+
 <script>
-const players=[
-{id:'shin',name:'신의재',grade:'남 · 중3',track:['EP2,000m','1,000m','계주 2,000m'],road:['P3,000m','P3,000m (명단 중복 표기)','계주 3,000m']},
-{id:'baek',name:'백민혁',grade:'남 · 중2',track:['DTT200m','500m+D','계주 2,000m'],road:['100m','1LP','계주 3,000m']},
-{id:'seo',name:'김서후',grade:'남 · 중1',track:['EP2,000m','P3,000m','계주 2,000m'],road:['E3,000m','P3,000m','계주 3,000m']},
-{id:'ga',name:'김가현',grade:'여 · 중2',track:['EP2,000m','P3,000m'],road:['E3,000m','P3,000m']},
-{id:'jun',name:'이준수',grade:'남 · 초6 · B조',track:['500m+D','300m'],road:[]},
-{id:'nayeon',name:'김나연',grade:'여 · 초3 · B조',track:['800m','300m'],road:['1,000m','1LP']},
-{id:'eun',name:'양은우',grade:'여 · 초2 · B조',track:['400m+D','300m'],road:['100m','1LP']},
-{id:'jae',name:'송재이',grade:'여 · 초1 · B조',track:['200m','300m'],road:[]},
-{id:'ji',name:'이지수',grade:'여 · 초1 · B조',track:[],road:[]},
-{id:'hee',name:'이희륜',grade:'남 · 고3 · 중경고',track:[],road:[]}
-];
-// PDF 원본 일차별 경기 번호 범위. 명칭은 원문에서 확인된 항목만 표기합니다.
-// 공식 대진표는 시간표가 아니라 경기 순서/조 편성 자료입니다.
-const byDay=[
-  Array.from({length:44},(_,i)=>i+1),
-  Array.from({length:66},(_,i)=>i+45),
-  Array.from({length:39},(_,i)=>i+111),
-  Array.from({length:13},(_,i)=>i+150)
-];
-// 일부 원문에서 번호 중복 / 결번이 있어 번호만으로 동일 경기로 보지 않습니다.
-const titles={
-  1:'여자 초등부(5,6학년) 500m+D 예선',2:'남자 초등부(5,6학년) 500m+D 예선',
-  3:'여자 초등부(3,4학년) 500m+D 예선',4:'남자 초등부(3,4학년) 500m+D 예선',5:'여자 중등부 E5,000m 결승',
-  6:'남자 중등부 E5,000m 결승',11:'남자 대학부 1,000m 결승',12:'여자 고등부 E3,000m 결승',13:'남자 고등부 E3,000m 결승',
-  25:'여자 초등부(5,6학년) DTT200m 예선',26:'남자 초등부(5,6학년) DTT200m 예선',
-  27:'여자 중등부 DTT200m 예선',28:'남자 중등부 DTT200m 예선',
-  29:'남자 일반부 DTT200m 예선',30:'여자 초등부(1,2학년) 400m 결승',
-  31:'여자 중등부 EP2,000m 결승',32:'남자 중등부 EP2,000m 결승',
-  33:'남자 중등부 EP2,000m 결승',34:'남자 고등부 EP2,000m 결승',
-  38:'여자 중등부 DTT200m 결승',39:'남자 중등부 DTT200m 결승',40:'남자 고등부 DTT200m 결승',41:'여자 대학부 DTT200m 결승',42:'남자 대학부 DTT200m 결승',43:'여자 일반부 DTT200m 결승',44:'남자 일반부 DTT200m 결승',
-  45:'남자 중등부 DTT200m 결승',46:'여자 초등부(5,6학년) 1,000m 예선',47:'남자 초등부(5,6학년) 1,000m 예선',
-  48:'여자 초등부(3,4학년) 1,000m 예선',49:'남자 초등부(3,4학년) 1,000m 예선',
-  58:'여자 초등부(5,6학년) 1,000m 결승',59:'여자 중등부 1,000m 예선',
-  60:'남자 중등부 1,000m 예선',61:'남자 일반부 1,000m 예선',65:'여자 초등부(5,6학년) P3,000m 결승',
-  66:'남자 대학부 P3,000m 결승',67:'여자 고등부 P3,000m 결승',68:'남자 고등부 P3,000m 결승',
-  69:'여자 일반부 P3,000m 결승',70:'남자 일반부 P3,000m 결승',
-  71:'여자 초등부(5,6학년) Flying 1Lap 예선',72:'남자 초등부(5,6학년) Flying 1Lap 예선',
-  73:'여자 초등부(3,4학년) Flying 1Lap 예선',74:'남자 초등부(3,4학년) Flying 1Lap 예선',
-  75:'여자 고등부 Flying 1Lap 예선',76:'남자 고등부 Flying 1Lap 예선',
-  77:'남자 대학부 Flying 1Lap 예선',78:'남자 일반부 Flying 1Lap 예선',
-  79:'여자 중등부 1,000m 결승',80:'남자 중등부 1,000m 결승',
-  81:'여자 고등부 1,000m 결승',82:'남자 고등부 1,000m 결승',
-  83:'여자 일반부 1,000m 결승',84:'남자 일반부 1,000m 결승',
-  111:'여자 초등부(3,4학년) 300m 예선',112:'남자 초등부(3,4학년) 300m 예선',
-  113:'여자 중등부 500m 예선',114:'남자 중등부 500m 예선',
-  115:'여자 고등부 500m 예선',116:'남자 고등부 500m 예선',
-  117:'여자 일반부 500m 예선',118:'남자 일반부 500m 예선',
-  119:'남자 초등부(3,4학년) 300m 결승',
-  120:'여자 초등부(5,6학년) D3,000m 결승',121:'여자 초등부(5,6학년) 300m 결승',
-  122:'여자 초등부(3,4학년) 300m 결승',123:'남자 초등부(3,4학년) 300m 결승',
-  124:'남자 초등부(5,6학년) 500m 결승',
-  151:'남자 일반부 P2,000m 결승',152:'여자 중등부 DTT200m 결승',
-  153:'남자 중등부 DTT200m 결승',154:'남자 일반부 DTT200m 결승',
-  155:'남자 일반부 P2,000m 결승',156:'여자 중등부 P2,000m 결승',
-  157:'남자 중등부 P2,000m 결승',158:'여자 고등부 P2,000m 결승',
-  159:'남자 고등부 P2,000m 결승',160:'남자 대학부 P2,000m 결승',
-  161:'남자 일반부 P2,000m 결승',162:'남자 일반부 P2,000m 결승'
+const DATA = {"members": [{"bib": 42, "name": "신의재", "div": "중등", "gender": "남", "grade": 3}, {"bib": 41, "name": "백민혁", "div": "중등", "gender": "남", "grade": 2}, {"bib": 40, "name": "김서후", "div": "중등", "gender": "남", "grade": 1}, {"bib": 35, "name": "김가현", "div": "중등", "gender": "여", "grade": 2}, {"bib": 20, "name": "이희륜", "div": "고등", "gender": "남", "grade": 3}, {"bib": 26, "name": "이준수", "div": "초등 B조(5,6학년)", "gender": "남", "grade": 6}, {"bib": 30, "name": "김나연", "div": "초등 B조(3,4학년)", "gender": "여", "grade": 3}, {"bib": 32, "name": "양은우", "div": "초등 B조(1,2학년)", "gender": "여", "grade": 2}, {"bib": 31, "name": "송재이", "div": "초등 B조(1,2학년)", "gender": "여", "grade": 1}, {"bib": 33, "name": "이지수", "div": "초등 B조(1,2학년)", "gender": "여", "grade": 1}], "extra": [["이희륜", "중경고등학교"]], "events": [{"no": 28, "day": 1, "name": "남자 중등부 DTT200m 예선", "type": "ind", "heats": [["3조", [[41, "백민혁", "서울", "서울스포츠클럽", 2], [46, "신은규", "강원", "솔올중학교", 2]]]]}, {"no": 31, "day": 1, "name": "여자 중등부 EP2,000m 결승", "type": "ind", "heats": [["결승 (조 구분 없음)", [[17, "박주연", "대구", "성산중학교", 2], [19, "서채빈", "경기", "LHJ인라인클럽", 2], [27, "이다희", "세종", "세종시PLS클럽", 1], [30, "권예지", "경북", "영주여자중학교", 1], [35, "김가현", "서울", "서울스포츠클럽", 2], [18, "최수연", "대구", "성산중학교", 3], [24, "현채윤", "경기", "귀인중학교", 1], [33, "최은설", "경북", "영주여자중학교", 3]]]]}, {"no": 32, "day": 1, "name": "남자 중등부 EP2,000m 결승", "type": "ind", "heats": [["결승 (조 구분 없음)", [[1, "백서준", "충북", "가경중학교", 1], [17, "장유성", "대구", "경신중학교", 1], [34, "이하람", "경북", "대영중학교", 2], [39, "김민재", "부산", "하단중학교", 3], [40, "김서후", "서울", "서울스포츠클럽", 1], [49, "김단우", "울산", "미코스텔라인라인클럽", 2], [7, "이동현", "충북", "오송중학교", 3], [19, "김예준", "대구", "대구 피닉스", 1], [42, "신의재", "서울", "서울스포츠클럽", 3], [8, "이은혁", "충북", "오송중학교", 3], [23, "정유환", "대구", "성산중학교", 1]]]]}, {"no": 40, "day": 1, "name": "남자 고등부 DTT200m 결승", "type": "ind", "heats": [["2조", [[20, "이희륜", "서울", "중경고등학교", 3], [22, "권오영", "강원", "경포고등학교", 1]]]]}, {"no": 50, "day": 2, "name": "여자 초등부 일반학생(B조)(1,2학년) 400m+D 결승", "type": "ind", "heats": [["3조", [[8, "김서이", "충북", "청주 서현초등학교 롤러부", 1], [32, "양은우", "서울", "서울스포츠클럽", 2], [38, "치안예희", "인천", "인천 스페셜원", 1]]]]}, {"no": 55, "day": 2, "name": "남자 초등부 일반학생(B조)(5,6학년) 500m+D 결승", "type": "ind", "heats": [["4조", [[17, "양희재", "경기", "고양지스포츠클럽", 6], [26, "이준수", "서울", "서울스포츠클럽", 6], [43, "조하람", "강원", "봉대초등학교", 5]]]]}, {"no": 60, "day": 2, "name": "남자 중등부 1,000m 예선", "type": "ind", "heats": [["3조", [[4, "김재신", "충북", "단성중학교", 1], [7, "이동현", "충북", "오송중학교", 3], [18, "최재민", "대구", "경신중학교", 3], [24, "김은성", "경기", "PIC인라인클럽", 2], [30, "이채훈", "세종", "세종시PLS클럽", 2], [42, "신의재", "서울", "서울스포츠클럽", 3]]]]}, {"no": 62, "day": 2, "name": "여자 중등부 P5,000m 결승", "type": "ind", "heats": [["결승 (조 구분 없음)", [[6, "한지수", "충북", "오송중학교", 1], [14, "박초율", "충남", "충청남도롤러스포츠연맹", 1], [16, "김보민", "대구", "성산중학교", 3], [20, "이시은", "경기", "LHJ인라인클럽", 2], [27, "이다희", "세종", "세종시PLS클럽", 1], [34, "이다솔", "부산", "하단중학교", 1], [35, "김가현", "서울", "서울스포츠클럽", 2], [38, "장서은", "전북", "전주중학교", 2], [39, "배근영", "경남", "거제롤러스포츠연맹", 1], [7, "강민서", "충북", "제천여자중학교", 1], [22, "김민지", "경기", "귀인중학교", 2], [10, "전예슬", "충북", "제천여자중학교", 3], [24, "현채윤", "경기", "귀인중학교", 1], [25, "임효민", "경기", "성호중학교", 2], [26, "김도연", "경기", "성호중학교", 3]]]]}, {"no": 63, "day": 2, "name": "남자 중등부 P5,000m 결승 (원문에는 62번 여자 중등부로 중복 인쇄)", "type": "ind", "heats": [["결승 (조 구분 없음)", [[3, "김단율", "충북", "단성중학교", 3], [12, "박시훈", "충남", "논산중학교", 2], [16, "임종빈", "대구", "경신중학교", 2], [25, "최서준", "경기", "경기 스페셜원", 2], [31, "임태균", "세종", "세종시PLS클럽", 2], [37, "조준상", "부산", "하단중학교", 1], [40, "김서후", "서울", "서울스포츠클럽", 1], [43, "곽도현", "경남", "CRS스포츠클럽", 2], [48, "주원", "인천", "인천 스페셜원", 3], [10, "윤승찬", "충북", "제천중학교", 2], [13, "김준우", "충남", "논산중학교", 1], [17, "장유성", "대구", "경신중학교", 1], [29, "김동준", "경기", "성호중학교", 3], [38, "이상민", "부산", "하단중학교", 3], [44, "이승현", "경남", "거제롤러스포츠연맹", 2], [19, "김예준", "대구", "대구 피닉스", 1], [21, "최예준", "대구", "대구 한순익", 3]]]]}, {"no": 76, "day": 2, "name": "남자 고등부 Flying 1 Lap 예선", "type": "ind", "heats": [["4조", [[20, "이희륜", "서울", "중경고등학교", 3]]]]}, {"no": 87, "day": 2, "name": "여자 초등부 일반학생(B조)(1,2학년) 200m 결승", "type": "ind", "heats": [["1조", [[1, "이윤설", "제주", "권태진인라인클럽", 2], [21, "김도연", "경기", "피아이씨인라인클럽", 2], [33, "이지수", "서울", "서울스포츠클럽", 1], [41, "김시아", "대전", "VIP스포츠클럽", 2]]], ["4조", [[11, "최서은", "충남", "논산내동초", 1], [31, "송재이", "서울", "서울스포츠클럽", 1], [38, "치안예희", "인천", "인천 스페셜원", 1]]]]}, {"no": 89, "day": 2, "name": "여자 초등부 일반학생(B조)(3,4학년) 800m 결승", "type": "ind", "heats": [["결승 (조 구분 없음)", [[14, "정시아", "경기", "경기 팀에스", 4], [27, "임보배", "부산", "더랩(THE LAP)", 4], [30, "김나연", "서울", "서울스포츠클럽", 3], [39, "이에스더", "대전", "DRC 인라인클럽", 4], [15, "조아라", "경기", "원당초등학교", 4], [40, "천주은", "대전", "DRC 인라인클럽", 4], [42, "문시온", "대전", "대전수정초등학교", 4]]]]}, {"no": 114, "day": 3, "name": "남자 중등부 500m+D 예선", "type": "ind", "heats": [["1조", [[6, "유승호", "충북", "오송중학교", 2], [15, "조예강", "충남", "논산중학교", 1], [26, "조은혁", "경기", "경기 팀에스", 3], [41, "백민혁", "서울", "서울스포츠클럽", 2]]]]}, {"no": 116, "day": 3, "name": "남자 고등부 500m+D 예선", "type": "ind", "heats": [["2조", [[3, "서영석", "충북", "서원고등학교", 3], [15, "황현찬", "경북", "사곡고등학교", 2], [20, "이희륜", "서울", "중경고등학교", 3]]]]}, {"no": 131, "day": 3, "name": "여자 초등부 일반학생(B조)(1,2학년) 300m 결승", "type": "ind", "heats": [["1조", [[1, "이윤설", "제주", "권태진인라인클럽", 2], [21, "김도연", "경기", "피아이씨인라인클럽", 2], [31, "송재이", "서울", "서울스포츠클럽", 1], [45, "송혜인", "울산", "울산중구롤러스포츠연맹", 2]]], ["2조", [[9, "육민경", "충북", "충북 YM스포츠클럽", 1], [23, "김도아", "경북", "송정초등학교", 1], [32, "양은우", "서울", "서울스포츠클럽", 2]]], ["3조", [[11, "최서은", "충남", "논산내동초", 1], [29, "정하림", "부산", "슈퍼비클럽", 2], [33, "이지수", "서울", "서울스포츠클럽", 1]]]]}, {"no": 133, "day": 3, "name": "여자 초등부 일반학생(B조)(3,4학년) 300m 결승", "type": "ind", "heats": [["1조", [[4, "양수지", "충북", "단양초등학교", 4], [14, "정시아", "경기", "경기 팀에스", 4], [30, "김나연", "서울", "서울스포츠클럽", 3], [44, "김윤아", "울산", "울산중구롤러스포츠연맹", 3]]]]}, {"no": 136, "day": 3, "name": "남자 초등부 일반학생(B조)(5,6학년) 300m 결승", "type": "ind", "heats": [["2조", [[15, "권유현", "경기", "고양지스포츠클럽", 5], [26, "이준수", "서울", "서울스포츠클럽", 6], [43, "조하람", "강원", "봉대초등학교", 5]]]]}, {"no": 158, "day": 4, "name": "남자 중등부 계주2,000m 결승", "type": "relay", "heats": [["결승 (조 구분 없음)", [["충북", "단성중학교", "원문 미표기", []], ["대구", "경신중학교", "원문 미표기", []], ["부산", "하단중학교", "원문 미표기", []], ["서울", "서울스포츠클럽", "원문 미표기 (주자는 팀 명단 기준)", [[42, "신의재", "서울스포츠클럽", 3], [41, "백민혁", "서울스포츠클럽", 2], [40, "김서후", "서울스포츠클럽", 1]]]]]]}], "refs": [{"no": 38, "day": 1, "name": "남자 중등부 DTT200m 결승", "who": "백민혁 (28번 경기 예선 통과 시)"}, {"no": 80, "day": 2, "name": "남자 중등부 1,000m 결승", "who": "신의재 (60번 경기 예선 통과 시)"}, {"no": 102, "day": 2, "name": "남자 고등부 Flying 1 Lap 결승", "who": "이희륜 (76번 경기 예선 통과 시)"}, {"no": 140, "day": 3, "name": "남자 중등부 500m+D 준결승", "who": "백민혁 (114번 경기 예선 통과 시)"}, {"no": 141, "day": 3, "name": "남자 고등부 500m+D 준결승", "who": "이희륜 (116번 경기 예선 통과 시)"}, {"no": 148, "day": 3, "name": "남자 중등부 500m+D 결승", "who": "백민혁 (진출 시)"}, {"no": 150, "day": 3, "name": "남자 고등부 500m+D 결승", "who": "이희륜 (진출 시)"}], "days": {"1": "10월 30일 (금)", "2": "10월 31일 (토)", "3": "11월 1일 (일)", "4": "11월 2일 (월)"}, "program": {"1": [["e", "1"], ["e", "2"], ["e", "3"], ["e", "4"], ["m", "워밍업"], ["e", "5"], ["e", "6"], ["m", "워밍업"], ["e", "7"], ["e", "8"], ["e", "9"], ["m", "워밍업"], ["e", "10"], ["e", "11"], ["e", "12"], ["e", "13"], ["m", "워밍업"], ["e", "14"], ["e", "15"], ["e", "16"], ["e", "17"], ["m", "워밍업"], ["e", "18"], ["e", "19"], ["m", "워밍업"], ["e", "20"], ["e", "21"], ["e", "22"], ["e", "23"], ["e", "24"], ["m", "점심시간"], ["e", "25"], ["e", "26"], ["e", "27"], ["e", "28"], ["e", "29"], ["m", "워밍업"], ["e", "30"], ["e", "31"], ["e", "32"], ["e", "33"], ["e", "34"], ["m", "워밍업"], ["e", "35"], ["e", "36"], ["e", "37"], ["e", "38"], ["e", "39"], ["e", "40"], ["e", "41"], ["e", "42"], ["e", "43"], ["e", "44"], ["end", "1일차 경기 종료"]], "2": [["e", "45"], ["e", "46"], ["e", "47"], ["e", "48"], ["e", "49"], ["m", "워밍업"], ["e", "50"], ["e", "51"], ["e", "52"], ["e", "53"], ["e", "54"], ["e", "55"], ["e", "56"], ["e", "57"], ["m", "워밍업"], ["e", "58"], ["e", "59"], ["e", "60"], ["e", "61"], ["m", "워밍업"], ["e", "62"], ["e", "63"], ["m", "워밍업"], ["e", "64"], ["e", "65"], ["e", "66"], ["e", "67"], ["e", "68"], ["e", "69"], ["e", "70"], ["m", "점심시간"], ["e", "71"], ["e", "72"], ["e", "73"], ["e", "74"], ["e", "75"], ["e", "76"], ["e", "77"], ["e", "78"], ["m", "워밍업"], ["e", "79"], ["e", "80"], ["e", "81"], ["e", "82"], ["e", "83"], ["e", "84"], ["m", "워밍업"], ["e", "85"], ["e", "86"], ["e", "87"], ["e", "88"], ["m", "워밍업"], ["e", "89"], ["e", "90"], ["e", "91"], ["e", "92"], ["e", "93"], ["e", "94"], ["e", "95"], ["e", "96"], ["m", "워밍업"], ["e", "97"], ["e", "98"], ["e", "99"], ["e", "100"], ["e", "101"], ["e", "102"], ["e", "103"], ["e", "104"], ["e", "105"], ["e", "106"], ["m", "워밍업"], ["e", "107"], ["e", "108"], ["e", "109"], ["e", "110"], ["end", "2일차 경기 종료"]], "3": [["e", "111"], ["e", "112"], ["e", "113"], ["e", "114"], ["e", "115"], ["e", "116"], ["e", "117"], ["e", "118"], ["e", "119"], ["m", "워밍업"], ["e", "120"], ["e", "121"], ["m", "워밍업"], ["e", "122"], ["e", "123"], ["e", "124"], ["m", "워밍업"], ["e", "125"], ["e", "126"], ["e", "127"], ["e", "128"], ["m", "워밍업"], ["e", "129"], ["e", "130"], ["m", "점심시간"], ["e", "131"], ["e", "132"], ["e", "133"], ["e", "134"], ["e", "135"], ["e", "136"], ["m", "워밍업"], ["e", "137"], ["e", "138"], ["m", "워밍업"], ["e", "139"], ["e", "140"], ["e", "141"], ["e", "142"], ["e", "143"], ["m", "워밍업"], ["e", "144"], ["e", "145"], ["e", "146"], ["m", "워밍업"], ["e", "147"], ["e", "148"], ["e", "149"], ["e", "150"], ["e", "151"], ["e", "152"], ["end", "3일차 경기 종료"]], "4": [["e", "153"], ["m", "워밍업"], ["e", "154"], ["e", "155"], ["e", "156"], ["m", "워밍업"], ["e", "157"], ["e", "158"], ["e", "159"], ["e", "160"], ["e", "161"], ["e", "162"], ["end", "4일차 경기 종료"]]}};
+const DAYS = DATA.days;
+const EXTRA = new Set(["이희륜|중경고등학교"]); // 클럽 소속이나 학교명으로 출전
+const isClub = (name, team) => team === "서울스포츠클럽" || EXTRA.has(name + "|" + team);
+
+/* ---- 대회 기간이면 해당 일차를 기본 선택 ---- */
+function defaultDay(){
+  const t = new Date();
+  const k = t.getFullYear()*10000 + (t.getMonth()+1)*100 + t.getDate();
+  const map = {20261030:1, 20261031:2, 20261101:3, 20261102:4};
+  return map[k] || 0;
+}
+const state = { day: defaultDay(), who: "", panel: false };
+
+const gradeLabel = (evName, g) => {
+  if (g == null) return "";
+  if (evName.includes("중등부")) return "중" + g;
+  if (evName.includes("고등부")) return "고" + g;
+  return "초" + g;
 };
-// 원본 1페이지 직접 대조: 배번/이름/지역/소속. 아직 미검증된 경기에는 상세 명단을 표시하지 않습니다.
-const verifiedHeats={
-  1:[
-    ['1조',[[2,'박지아','충북','동명초등학교6'],[25,'박소윤','대구','성산초등학교6'],[46,'최서윤','경기','이나나인라인클럽5'],[72,'박현지','경남','칠산초등학교5']]],
-    ['2조',[[3,'엄예서','충북','만수초등학교6'],[28,'박가은','경기','national sports5'],[50,'박서연','경북','대구교대안동부설초등학교5'],[74,'주민서','강원','봉대초등학교6']]],
-    ['3조',[[9,'김민주','충북','진흥초등학교6'],[29,'이세아','경기','경기팀예스5'],[52,'방혜원','경북','송정초등학교5'],[77,'최지혜','대전','대전글꽃초등학교6']]],
-    ['4조',[[10,'조아현','충북','진흥초등학교6'],[34,'김하경','경기','부림초등학교5'],[56,'이수연','경북','안동강남초등학교5'],[78,'김예원','대전','수정초등학교5']]],
-    ['5조',[[11,'김나윤','충남','논산내동초등학교5'],[35,'이다희','경기','부림초등학교6'],[57,'권유진','경북','안동시스포츠클럽5'],[79,'전은유','울산','옥산초등학교6']]],
-    ['6조',[[13,'김민아','충남','충남써니롤러5'],[36,'이성연','경기','부림초등학교6'],[66,'이서윤','경남','CRS스포츠클럽6']]],
-    ['7조',[[15,'백승윤','충남','충남써니롤러6'],[45,'김소연','경기','이나나인라인클럽6'],[71,'박하은','경남','창원초등학교6']]]
-  ],
-  2:[
-    ['1조',[[6,'양한율','충남','논산내동초등학교6'],[31,'김태훈','경기','부천G스포츠클럽5'],[51,'박경태','경북','안동강남초등학교6'],[77,'최원형','강원','동명초등학교5']]],
-    ['2조',[[11,'우재원','전남','여수롤러클럽6'],[36,'김태원','경기','오산시롤러스포츠연맹5'],[60,'김시윤','부산','슈퍼비클럽5'],[79,'조하은','강원','봉대초등학교5']]],
-    ['3조',[[13,'이도원','대구','BONT6'],[38,'이준혁','경기','오산시롤러스포츠연맹6'],[63,'정지혁','부산','슈퍼비클럽5'],[80,'반경민','강원','탑웨이브5']]]
-  ]
-};
-function matchedBibDetail(n){return verifiedHeats[n]||null}
-const teamEvents={28:['백민혁'],31:['김가현'],32:['신의재','김서후'],39:['백민혁'],40:['이희륜']};
-let starred=[];try{starred=JSON.parse(localStorage.getItem('ssc261030-stars')||'[]')}catch(e){}
-let scheduleView="schedule";let filter='all',query='',selected=null,mode='track',day=0;
-const $=s=>document.querySelector(s);
-function el(tag,cls,txt){const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n}
-function renderPlayers(){const root=$('#athletes');root.replaceChildren();const list=players.filter(p=>(filter==='all'||starred.includes(p.id))&&p.name.includes(query));if(!list.length)root.append(el('p','note','검색 결과가 없습니다.'));
-for(const p of list){const card=el('div','athlete');card.style.cursor='pointer';if(selected===p.id)card.style.borderColor='#2b75be';
-card.append(el('div','avatar',p.name.slice(-2)));const inf=el('div','info');inf.append(el('strong','',p.name),el('small','',p.grade));card.append(inf);
-const star=el('button','star'+(starred.includes(p.id)?' on':''),starred.includes(p.id)?'★':'☆');star.setAttribute('aria-label',p.name+' 관심 선수');
-star.onclick=e=>{e.stopPropagation();starred=starred.includes(p.id)?starred.filter(id=>id!==p.id):[...starred,p.id];localStorage.setItem('ssc261030-stars',JSON.stringify(starred));renderPlayers()};card.append(star);
-card.onclick=()=>{selected=selected===p.id?null:p.id;renderPlayers();renderEntries();$('#entries').scrollIntoView({behavior:'smooth',block:'nearest'})};root.append(card)}}
-function renderDays(){const root=$('#days');root.replaceChildren();['10.30 금','10.31 토','11.01 일','11.02 월'].forEach((d,i)=>{const btn=el('button','day'+(day===i?' active':''));btn.append(el('small','', 'DAY 0'+(i+1)),document.createTextNode(d));btn.onclick=()=>{day=i;renderDays();renderCalendar()};root.append(btn)})}
-function renderCalendar(){const root=$('#calendar');root.replaceChildren();
-if(mode==='road'){root.append(el('div','subtle','첨부된 공식 자료는 트랙 대진표입니다. 로드 전체 경기 일정은 해당 로드 대진표가 필요합니다.'));return}
-const showAll=$('#showall').checked;
-const ids=byDay[day].filter(n=>showAll||teamEvents[n]);
-root.append(el('p','note', '트랙 '+(day+1)+'일차 · '+(showAll?'전체 경기 번호':'확인된 우리 팀 경기')+' · 공식 대진표 순서'));
-if(!ids.length){root.append(el('div','subtle','현재 확보된 PDF의 이 날짜 선수별 출전 명단과 팀 종목을 자동으로 매칭할 수 없습니다. 전체 일정 스위치를 켜 원본 경기번호 목록을 볼 수 있습니다.'));return}
-for(const n of ids){const team=teamEvents[n];const row=el('div','event'+(team?' team':''));const number=el('div','number',n+'번');row.append(number);
-const body=el('div','detail');body.append(el('strong','',titles[n]||'종목명 대조 필요'));
-body.append(el('small','',team?'우리 팀: '+team.join(' · '):'대진표 경기번호 · 종목/조 대조 필요'));row.append(body);
-if(team)row.append(el('span','tag','우리 팀'));row.tabIndex=0;row.setAttribute('role','button');row.setAttribute('aria-label',n+'번 경기 상세 펼치기');const more=el('div','subtle');const verified=matchedBibDetail(n);if(verified){for(const [heat,athletes] of verified){const part=el('div','');part.style.cssText='padding:9px 0;border-bottom:1px solid #dbe5ef';part.append(el('strong','',heat));for(const [bib,name,region,club] of athletes){const line=el('div','',bib+' · '+name+' · '+region+' · '+club);line.style.cssText='font-size:12px;line-height:1.75';part.append(line)}more.append(part)}more.append(el('p','note','원본 PDF 1쪽 대조 · 나머지 조는 추가 검증 필요'))}else{more.append(el('span','', '이 경기의 조별 출전명단은 아직 원본 대조 중입니다. 확인된 팀 선수: '+(team?team.join(', '):'미확인')+'.'))}more.style.display='none';const box=el('div');box.append(row,more);const toggle=()=>{more.style.display=more.style.display==='none'?'block':'none';row.setAttribute('aria-expanded',String(more.style.display!=='none'))};row.onclick=toggle;row.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}};root.append(box)}
-root.append(el('p','note','※ 전체 번호는 원본 PDF 인쇄 순서를 토대로 한 임시 색인입니다. 실제 원문에는 결번/중복 및 예선·결승 구분이 있으므로 공식 대진표와 대조해야 합니다. 선수 하이라이트는 검증된 일부 경기만 표시했습니다.'))}
-function renderCategories(){const root=$('#categories');root.replaceChildren();const groups=[['초등부',/(초등부|초등)/],['중등부',/중등부/],['고등부',/고등부/],['대학부',/대학부/],['일반부',/일반부/],['기타 · 미확인',null]];
-const assigned=new Set();for(const [name,re] of groups){let nums=[];for(let i=0;i<byDay.length;i++)for(const n of byDay[i]){if(assigned.has(n))continue;const match=re?re.test(titles[n]||''):!groups.slice(0,5).some(g=>g[1].test(titles[n]||''));if(match){nums.push([n,i]);assigned.add(n)}}if(!nums.length)continue;
-const details=el('details','panel');details.style.cssText='padding:10px 14px;margin:10px 0;box-shadow:none;border:1px solid #e4ebf2';const summary=el('summary','',name+' · '+nums.length+'경기');summary.style.cssText='cursor:pointer;font-weight:700;padding:6px';details.append(summary);
-const links=el('div','tabs');links.style.marginTop='12px';for(const [n,di] of nums){const b=el('button','pill'+(teamEvents[n]?' active':''),n+'번 '+(titles[n]||'종목 확인 필요'));b.style.fontSize='12px';b.onclick=()=>{scheduleView='schedule';day=di;$('#viewstyles').querySelectorAll('button').forEach(v=>v.classList.toggle('active',v.dataset.view==='schedule'));syncView();renderDays();$('#showall').checked=true;renderCalendar();const cards=[...document.querySelectorAll('#calendar .event')];const card=cards.find(c=>c.querySelector('.number')?.textContent===n+'번');card?.scrollIntoView({behavior:'smooth',block:'center'})};links.append(b)}details.append(links);root.append(details)}}
-function syncView(){const schedule=scheduleView==='schedule';$('#days').hidden=!schedule;$('#calendar').hidden=!schedule;$('#categories').hidden=schedule;$('#showall').closest('label').hidden=!schedule;if(!schedule)renderCategories()}
-$('#viewstyles').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(!b)return;scheduleView=b.dataset.view;$('#viewstyles').querySelectorAll('button').forEach(v=>v.classList.toggle('active',v===b));syncView()});
-$('#showall').addEventListener('change',renderCalendar);
-function renderEntries(){const root=$('#entries');root.replaceChildren();for(const p of players.filter(p=>!selected||p.id===selected)){const div=el('div','events-per');div.append(el('strong','',p.name+' · '+p.grade));div.append(el('p','', '트랙: '+(p.track.join(' · ')||'확인 필요')+'\n로드: '+(p.road.join(' · ')||'확인 필요')));div.lastChild.style.whiteSpace='pre-line';root.append(div)}}
-$('#search').addEventListener('input',e=>{query=e.target.value.trim();renderPlayers()});
-$('#reset').onclick=()=>{selected=null;query='';$('#search').value='';filter='all';$('#filter').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));renderPlayers();renderEntries()};
-$('#filter').onclick=e=>{const b=e.target.closest('button');if(!b)return;filter=b.dataset.filter;$('#filter').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderPlayers()};
-$('#modes').onclick=e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.mode;$('#modes').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderCalendar()};
-renderPlayers();renderDays();renderCalendar();renderEntries();syncView();
-</script></body></html>
+
+/* ---- summary stats ---- */
+(function(){
+  let apps = 0;
+  DATA.events.forEach(ev => ev.heats.forEach(([label, rows]) => {
+    if (ev.type === "ind") rows.forEach(r => { if (isClub(r[1], r[3])) apps++; });
+    else rows.forEach(t => (t[3]||[]).forEach(m => { if (isClub(m[1], m[2])) apps++; }));
+  }));
+  document.getElementById("stats").innerHTML = [
+    [String(DATA.members.length),"출전 선수"], [String(apps),"총 출전 건수"],
+    [String(DATA.events.length),"명단 확정 경기"], [String(DATA.refs.length),"진출 대기 경기"]
+  ].map(([b,s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+})();
+
+/* ---- day tabs ---- */
+function renderTabs(){
+  const el = document.getElementById("dayTabs");
+  const tabs = [[0,"전체","일정"],[1,"1일차","10/30 금"],[2,"2일차","10/31 토"],[3,"3일차","11/1 일"],[4,"4일차","11/2 월"]];
+  el.innerHTML = tabs.map(([d,l,s]) =>
+    `<button class="tab" data-d="${d}" aria-pressed="${state.day===d}">${l}<small>${s}</small></button>`).join("");
+  el.querySelectorAll("button").forEach(b => b.onclick = () => { state.day = +b.dataset.d; renderTabs(); renderApp(); });
+}
+
+/* ---- 접이식 선수 필터 ---- */
+function renderWho(){
+  const val = document.getElementById("whoVal");
+  const clear = document.getElementById("whoClear");
+  const toggle = document.getElementById("whoToggle");
+  if (state.who){
+    const m = DATA.members.find(m => m.name === state.who);
+    val.innerHTML = `<span class="b">${m.bib}</span>${m.name}`;
+    toggle.classList.add("active"); clear.hidden = false;
+  } else {
+    val.textContent = "전체 선수";
+    toggle.classList.remove("active"); clear.hidden = true;
+  }
+  toggle.setAttribute("aria-expanded", String(state.panel));
+  document.getElementById("whoPanel").classList.toggle("open", state.panel);
+
+  const grid = document.getElementById("whoGrid");
+  const groups = {};
+  DATA.members.forEach(m => (groups[m.div] = groups[m.div] || []).push(m));
+  let html = `<button class="chip all" data-w="" aria-pressed="${state.who===""}"><span class="b">ALL</span>전체 선수</button>`;
+  Object.entries(groups).forEach(([div, ms]) => {
+    html += `<span class="grp">${div}</span>` + ms.map(m =>
+      `<button class="chip" data-w="${m.name}" aria-pressed="${state.who===m.name}"><span class="b">${m.bib}</span>${m.name}</button>`).join("");
+  });
+  grid.innerHTML = html;
+  grid.querySelectorAll("button").forEach(b => b.onclick = () => {
+    state.who = b.dataset.w; state.panel = false; renderWho(); renderApp();
+  });
+}
+document.getElementById("whoToggle").onclick = () => { state.panel = !state.panel; renderWho(); };
+document.getElementById("whoClear").onclick = () => { state.who = ""; state.panel = false; renderWho(); renderApp(); };
+
+/* ---- 필터 적용 ---- */
+function heatHasWho(ev, heat, who){
+  const rows = heat[1];
+  if (ev.type === "ind") return rows.some(r => r[1] === who && isClub(r[1], r[3]));
+  return rows.some(t => (t[3]||[]).some(m => m[1] === who && isClub(m[1], m[2])));
+}
+function eventView(ev){
+  if (!state.who) return ev.heats;
+  return ev.heats.filter(h => heatHasWho(ev, h, state.who));
+}
+// 서울선발 참고경기(105→32, 141→122)와 연관된 클럽 선수
+function relayMembers(refNo){
+  const src = null; // 이번 대회는 서울선발 계주 참고경기 없음
+  if (!src) return [];
+  const ev = DATA.events.find(e => e.no === src);
+  const out = [];
+  ev.heats.forEach(([l, rows]) => rows.forEach(t => (t[3]||[]).forEach(m => { if (isClub(m[1], m[2])) out.push(m[1]); })));
+  return out;
+}
+function refVisible(r){
+  if (!state.who) return true;
+  return r.who.includes(state.who) ||
+    (r.who.includes("서울선발") && relayMembers(String(r.no)).includes(state.who));
+}
+
+/* ---- 렌더 조각 ---- */
+function rowHTML(ev, r){
+  const [bib,name,region,team,grade] = r;
+  const me = isClub(name, team);
+  return `<tr class="${me?"me":""}">
+    <td class="bib"><span class="n">${bib}</span></td>
+    <td class="nm">${name}${me?'<span class="tag">서울스포츠클럽</span>':""}</td>
+    <td class="tm">${region} · ${team}</td>
+    <td class="gr">${gradeLabel(ev.name, grade)}</td></tr>`;
+}
+function relayTeamHTML(ev, t){
+  const [region,tname,bibs,resolved] = t;
+  const me = (resolved||[]).some(m => isClub(m[1], m[2]));
+  let inner = "";
+  if ((resolved||[]).length){
+    inner = `<table>` + resolved.map(m => {
+      const [bib,name,team,grade] = m; const c = isClub(m[1], m[2]);
+      return `<tr class="${c?"me":""}"><td class="bib"><span class="n">${bib}</span></td>
+        <td class="nm">${name}${c?'<span class="tag">서울스포츠클럽</span>':""}</td>
+        <td class="tm">${team}</td><td class="gr">${gradeLabel(ev.name, grade)}</td></tr>`;
+    }).join("") + `</table>`;
+  }
+  return `<div class="rteam ${me?"me":""}">
+    <div class="rt2"><span class="rg">${region}</span><span class="rn">${tname}</span><span class="rb">배번 ${bibs}</span></div>
+    ${inner}</div>`;
+}
+function cardHTML(ev){
+  const heats = eventView(ev);
+  if (!heats.length) return "";
+  const body = heats.map(([label, rows]) => {
+    const content = ev.type === "ind"
+      ? `<table>${rows.map(r => rowHTML(ev, r)).join("")}</table>`
+      : rows.map(t => relayTeamHTML(ev, t)).join("");
+    return `<div class="heat"><span class="hlabel">${label}</span>${content}</div>`;
+  }).join("");
+  return `<article class="card">
+    <div class="head">
+      <div class="plate"><small>경기</small>${ev.no}</div>
+      <div><div class="ttl">${ev.name}</div><div class="sub">${DAYS[ev.day]} · ${ev.day}일차</div></div>
+    </div>${body}</article>`;
+}
+function refHTML(r){
+  return `<div class="refcard"><span class="rno">${r.no}</span>
+    <div><div class="rt">${r.name}</div><div class="rwho">명단 미게재 · ${r.who}</div></div></div>`;
+}
+function skipHTML(buf){
+  if (!buf.length) return "";
+  const label = buf.length === 1 ? `경기 <b>${buf[0]}</b> 진행`
+    : `경기 <b>${buf[0]}~${buf[buf.length-1]}</b> 진행 · ${buf.length}경기`;
+  return `<div class="skip">${label}</div>`;
+}
+
+/* ---- 일차 타임라인 ---- */
+function dayHTML(d){
+  const items = DATA.program[String(d)];
+  const evByNo = {}; DATA.events.forEach(e => evByNo[String(e.no)] = e);
+  const refByNo = {}; DATA.refs.forEach(r => refByNo[String(r.no)] = r);
+  let out = [], skipBuf = [], cardCnt = 0, pending = [];  // pending: 직전 마커들
+
+  const flushSkip = () => { if (skipBuf.length){ out.push(skipHTML(skipBuf)); skipBuf = []; } };
+  const flushPending = () => { pending.forEach(h => out.push(h)); pending = []; };
+
+  items.forEach(([t, v]) => {
+    if (t === "m"){
+      flushSkip();
+      const cls = v === "워밍업" ? "" : "rest";
+      const txt = v === "워밍업" ? "워 밍 업" : v === "휴식" ? "휴 식" : "점 심 시 간";
+      pending.push(`<div class="mark ${cls}">${txt}</div>`);
+    } else if (t === "end"){
+      flushSkip(); flushPending();
+      out.push(`<div class="mark fin">${v}</div>`);
+    } else {
+      const ev = evByNo[v], ref = refByNo[v];
+      if (ev){
+        const card = cardHTML(ev);
+        if (card){ flushSkip(); flushPending(); out.push(card); cardCnt++; return; }
+        skipBuf.push(v); if (pending.length){ /* 마커 뒤 첫 항목이 스킵이어도 마커는 유지 */ flushPending(); }
+      } else if (ref && refVisible(ref)){
+        flushSkip(); flushPending(); out.push(refHTML(ref));
+      } else {
+        skipBuf.push(v); if (pending.length){ flushPending(); }
+      }
+    }
+  });
+  flushSkip(); flushPending();
+  return { html: out.join(""), cardCnt };
+}
+
+function renderApp(){
+  const app = document.getElementById("app");
+  const days = state.day === 0 ? [1,2,3,4] : [state.day];
+  let html = "", any = false;
+  days.forEach(d => {
+    const { html: body, cardCnt } = dayHTML(d);
+    if (state.who && cardCnt === 0 && !body.includes("refcard")) return; // 선수 필터 시 해당 없는 날 생략
+    any = true;
+    html += `<div class="daytitle"><span class="d">DAY ${d}</span><span class="dt">${DAYS[d]}</span>
+      <span class="cnt">명단 확정 ${cardCnt}경기</span></div><div class="tl">${body}</div>`;
+  });
+  app.innerHTML = any ? html : `<div class="empty">선택한 조건에 해당하는 경기가 없습니다.<br>필터를 해제해 보세요.</div>`;
+}
+
+renderTabs(); renderWho(); renderApp();
+</script>
+</body>
+</html>
