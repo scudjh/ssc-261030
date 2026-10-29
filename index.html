@@ -29,7 +29,7 @@ button{border:0}.pill{border-radius:22px;border:1px solid #d8e1ee;background:#f7
 .days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 20px}
 .day{border:1px solid #dce5ef;border-radius:12px;background:white;padding:12px 3px;text-align:center;font-weight:700}
 .day small{display:block;font-weight:400;color:#8797aa;font-size:10px;margin-bottom:5px}.day.active{background:#183f73;color:white}.day.active small{color:#b9d9f8}
-.event{border:1px solid #e4ebf2;border-radius:13px;padding:14px;margin:10px 0;display:flex;align-items:center;gap:14px}
+.event.team{background:#e5f3ff;border-color:#52a2e6;box-shadow:inset 4px 0 #2268ad}.event.team .number{background:#2268ad;color:#fff}.event{border:1px solid #e4ebf2;border-radius:13px;padding:14px;margin:10px 0;display:flex;align-items:center;gap:14px}
 .number{width:53px;min-width:53px;text-align:center;background:#eef5fc;color:#245a96;border-radius:10px;padding:10px 4px;font-weight:850;font-size:14px}
 .number small{display:block;font-size:10px;font-weight:400}.event .detail{flex:1}.event strong{font-size:15px}.event .detail small{display:block;color:#738198;margin-top:4px}
 .tag{font-size:11px;padding:5px 8px;border-radius:30px;background:#fff2dc;color:#986010;white-space:nowrap}
@@ -52,7 +52,7 @@ footer{text-align:center;font-size:12px;color:#8090a4;padding:22px 15px}
 <p class="note">☆ 관심 선수는 이 기기에 저장됩니다. 선수를 누르면 아래에서 해당 선수의 종목을 볼 수 있습니다.</p></section>
 <section class="panel"><div class="row"><h2>경기 일정</h2><span class="tag">일정 검증 중</span></div>
 <div class="tabs mode" id="modes"><button class="pill active" data-mode="track">트랙</button><button class="pill" data-mode="road">로드</button></div>
-<div class="days" id="days"></div><div id="calendar"></div></section>
+<label class="subtle" style="display:flex;align-items:center;gap:12px;margin:12px 0;cursor:pointer"><input type="checkbox" id="showall" style="width:20px;height:20px;accent-color:#2268ad"> <span><strong>전체 일정 보기</strong><br><small>켜면 전체 경기를 표시하고, 우리 팀 경기를 파란색으로 강조합니다.</small></span></label><div class="days" id="days"></div><div id="calendar"></div></section>
 <section class="panel"><h2>선수별 참가 종목</h2><div id="entries"></div><p class="note">참가 종목은 제공된 팀 명단을 기준으로 표시합니다. 실제 배정된 일자, 경기번호, 조 편성은 공식 대진표를 우선해 주세요.</p></section>
 <section class="panel"><h2>원본 대진표 안내</h2><div class="subtle">현재 이 복구판에는 원본 대진표 PDF 링크가 포함되지 않았습니다. 정확한 경기번호·일자·조 편성을 확인하려면 공식 원본을 대조해야 합니다. 이전에 확인된 10월 30일 트랙 경기번호 일부만 아래에 참고용으로 표시합니다. 이 페이지는 공식 경기 운영 안내가 아닙니다.</div></section>
 <footer>SEOUL SPORTS CLUB · ROLL TOGETHER, GROW TOGETHER.<br>팀 응원을 위한 비공식 경기노트 · 현장 공지 우선</footer>
@@ -70,7 +70,54 @@ const players=[
 {id:'ji',name:'이지수',grade:'여 · 초1 · B조',track:[],road:[]},
 {id:'hee',name:'이희륜',grade:'남 · 고3 · 중경고',track:[],road:[]}
 ];
-const known=[{n:28,t:'남자 중등부 DTT200m 예선'},{n:31,t:'여자 중등부 EP2,000m 결승'},{n:32,t:'남자 중등부 EP2,000m 결승'},{n:38,t:'남자 중등부 DTT200m 결승'},{n:40,t:'남자 고등부 DTT200m 결승'}];
+// PDF 원본 일차별 경기 번호 범위. 명칭은 원문에서 확인된 항목만 표기합니다.
+// 공식 대진표는 시간표가 아니라 경기 순서/조 편성 자료입니다.
+const byDay=[
+  Array.from({length:43},(_,i)=>i+1),
+  Array.from({length:66},(_,i)=>i+45),
+  Array.from({length:38},(_,i)=>i+111),
+  Array.from({length:12},(_,i)=>i+151)
+];
+// 일부 원문에서 번호 중복 / 결번이 있어 번호만으로 동일 경기로 보지 않습니다.
+const titles={
+  1:'여자 초등부(5,6학년) 500m+D 예선',2:'남자 초등부(5,6학년) 500m+D 예선',
+  3:'여자 초등부(3,4학년) 500m+D 예선',4:'남자 초등부(3,4학년) 500m+D 예선',5:'여자 중등부 E5,000m 결승',
+  6:'남자 중등부 E5,000m 결승',11:'남자 대학부 1,000m 결승',12:'여자 고등부 E3,000m 결승',13:'남자 고등부 E3,000m 결승',
+  25:'여자 초등부(5,6학년) DTT200m 예선',26:'남자 초등부(5,6학년) DTT200m 예선',
+  27:'여자 중등부 DTT200m 예선',28:'남자 중등부 DTT200m 예선',
+  29:'남자 일반부 DTT200m 예선',30:'여자 초등부(1,2학년) 400m 결승',
+  31:'여자 중등부 EP2,000m 결승',32:'남자 중등부 EP2,000m 결승',
+  33:'남자 중등부 EP2,000m 결승',34:'남자 고등부 EP2,000m 결승',
+  38:'남자 중등부 DTT200m 결승',40:'남자 고등부 DTT200m 결승',
+  45:'남자 중등부 DTT200m 결승',46:'여자 초등부(5,6학년) 1,000m 예선',47:'남자 초등부(5,6학년) 1,000m 예선',
+  48:'여자 초등부(3,4학년) 1,000m 예선',49:'남자 초등부(3,4학년) 1,000m 예선',
+  58:'여자 초등부(5,6학년) 1,000m 결승',59:'여자 중등부 1,000m 예선',
+  60:'남자 중등부 1,000m 예선',61:'남자 일반부 1,000m 예선',65:'여자 초등부(5,6학년) P3,000m 결승',
+  66:'남자 대학부 P3,000m 결승',67:'여자 고등부 P3,000m 결승',68:'남자 고등부 P3,000m 결승',
+  69:'여자 일반부 P3,000m 결승',70:'남자 일반부 P3,000m 결승',
+  71:'여자 초등부(5,6학년) Flying 1Lap 예선',72:'남자 초등부(5,6학년) Flying 1Lap 예선',
+  73:'여자 초등부(3,4학년) Flying 1Lap 예선',74:'남자 초등부(3,4학년) Flying 1Lap 예선',
+  75:'여자 고등부 Flying 1Lap 예선',76:'남자 고등부 Flying 1Lap 예선',
+  77:'남자 대학부 Flying 1Lap 예선',78:'남자 일반부 Flying 1Lap 예선',
+  79:'여자 중등부 1,000m 결승',80:'남자 중등부 1,000m 결승',
+  81:'여자 고등부 1,000m 결승',82:'남자 고등부 1,000m 결승',
+  83:'여자 일반부 1,000m 결승',84:'남자 일반부 1,000m 결승',
+  111:'여자 초등부(3,4학년) 300m 예선',112:'남자 초등부(3,4학년) 300m 예선',
+  113:'여자 중등부 500m 예선',114:'남자 중등부 500m 예선',
+  115:'여자 고등부 500m 예선',116:'남자 고등부 500m 예선',
+  117:'여자 일반부 500m 예선',118:'남자 일반부 500m 예선',
+  119:'남자 초등부(3,4학년) 300m 결승',
+  120:'여자 초등부(5,6학년) D3,000m 결승',121:'여자 초등부(5,6학년) 300m 결승',
+  122:'여자 초등부(3,4학년) 300m 결승',123:'남자 초등부(3,4학년) 300m 결승',
+  124:'남자 초등부(5,6학년) 500m 결승',
+  151:'남자 일반부 P2,000m 결승',152:'여자 중등부 DTT200m 결승',
+  153:'남자 중등부 DTT200m 결승',154:'남자 일반부 DTT200m 결승',
+  155:'남자 일반부 P2,000m 결승',156:'여자 중등부 P2,000m 결승',
+  157:'남자 중등부 P2,000m 결승',158:'여자 고등부 P2,000m 결승',
+  159:'남자 고등부 P2,000m 결승',160:'남자 대학부 P2,000m 결승',
+  161:'남자 일반부 P2,000m 결승',162:'남자 일반부 P2,000m 결승'
+};
+const teamEvents={28:['백민혁'],31:['김가현'],32:['신의재','김서후'],38:['백민혁'],40:['이희륜']};
 let starred=[];try{starred=JSON.parse(localStorage.getItem('ssc261030-stars')||'[]')}catch(e){}
 let filter='all',query='',selected=null,mode='track',day=0;
 const $=s=>document.querySelector(s);
@@ -82,8 +129,18 @@ const star=el('button','star'+(starred.includes(p.id)?' on':''),starred.includes
 star.onclick=e=>{e.stopPropagation();starred=starred.includes(p.id)?starred.filter(id=>id!==p.id):[...starred,p.id];localStorage.setItem('ssc261030-stars',JSON.stringify(starred));renderPlayers()};card.append(star);
 card.onclick=()=>{selected=selected===p.id?null:p.id;renderPlayers();renderEntries();$('#entries').scrollIntoView({behavior:'smooth',block:'nearest'})};root.append(card)}}
 function renderDays(){const root=$('#days');root.replaceChildren();['10.30 금','10.31 토','11.01 일','11.02 월'].forEach((d,i)=>{const btn=el('button','day'+(day===i?' active':''));btn.append(el('small','', 'DAY 0'+(i+1)),document.createTextNode(d));btn.onclick=()=>{day=i;renderDays();renderCalendar()};root.append(btn)})}
-function renderCalendar(){const root=$('#calendar');root.replaceChildren();if(mode==='track'&&day===0){root.append(el('p','note','10월 30일 · 기존 사이트에서 확인된 경기번호 (선수별 연결은 미검증)'));for(const k of known){const row=el('div','event');row.append(el('div','number',k.n+'번'));const body=el('div','detail');body.append(el('strong','',k.t),el('small','','원본 대진표 대조 필요'));row.append(body);root.append(row)}}
-else root.append(el('div','subtle',mode==='road'?'로드 종목별 경기일자와 경기번호는 원본 대진표 확인이 필요합니다.':'이 날짜의 경기번호·출전 선수 정보는 원본 대진표 확인이 필요합니다.'))}
+function renderCalendar(){const root=$('#calendar');root.replaceChildren();
+if(mode==='road'){root.append(el('div','subtle','첨부된 공식 자료는 트랙 대진표입니다. 로드 전체 경기 일정은 해당 로드 대진표가 필요합니다.'));return}
+const showAll=$('#showall').checked;
+const ids=byDay[day].filter(n=>showAll||teamEvents[n]);
+root.append(el('p','note', '트랙 '+(day+1)+'일차 · '+(showAll?'전체 경기 번호':'확인된 우리 팀 경기')+' · 공식 대진표 순서'));
+if(!ids.length){root.append(el('div','subtle','현재 확보된 PDF의 이 날짜 선수별 출전 명단과 팀 종목을 자동으로 매칭할 수 없습니다. 전체 일정 스위치를 켜 원본 경기번호 목록을 볼 수 있습니다.'));return}
+for(const n of ids){const team=teamEvents[n];const row=el('div','event'+(team?' team':''));const number=el('div','number',n+'번');row.append(number);
+const body=el('div','detail');body.append(el('strong','',titles[n]||'종목명 대조 필요'));
+body.append(el('small','',team?'우리 팀: '+team.join(' · '):'대진표의 경기번호 · 종목/조 정보 확인 필요'));row.append(body);
+if(team)row.append(el('span','tag','우리 팀'));root.append(row)}
+root.append(el('p','note','※ 전체 번호는 원본 PDF 인쇄 순서를 토대로 한 임시 색인입니다. 실제 원문에는 결번/중복 및 예선·결승 구분이 있으므로 공식 대진표와 대조해야 합니다. 선수 하이라이트는 검증된 일부 경기만 표시했습니다.'))}
+$('#showall').addEventListener('change',renderCalendar);
 function renderEntries(){const root=$('#entries');root.replaceChildren();for(const p of players.filter(p=>!selected||p.id===selected)){const div=el('div','events-per');div.append(el('strong','',p.name+' · '+p.grade));div.append(el('p','', '트랙: '+(p.track.join(' · ')||'확인 필요')+'\n로드: '+(p.road.join(' · ')||'확인 필요')));div.lastChild.style.whiteSpace='pre-line';root.append(div)}}
 $('#search').addEventListener('input',e=>{query=e.target.value.trim();renderPlayers()});
 $('#reset').onclick=()=>{selected=null;query='';$('#search').value='';filter='all';$('#filter').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));renderPlayers();renderEntries()};
