@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101d34"><title>서울스포츠클럽 | 제천컵 경기노트</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#162840;background:#f3f6fa}
+*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}
+header{background:linear-gradient(125deg,#11213c,#214d82);color:#fff;padding:18px max(20px,calc((100vw - 1050px)/2)) 84px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:1.5px;color:#c4ddf5}
+.top a{text-decoration:none;border:1px solid #ffffff50;border-radius:99px;padding:7px 12px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.15;margin:38px 0 12px;letter-spacing:-2px}h1 em{font-style:normal;color:#92d6ff}
+header p{color:#dae6f4;line-height:1.7;margin:3px 0}
+main{max-width:1050px;margin:-57px auto 70px;padding:0 17px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat,.panel{background:white;border-radius:19px;box-shadow:0 7px 28px #13284712}
+.stat{padding:18px}.stat strong{display:block;font-size:27px}.stat span{color:#6e8095;font-size:12px}
+.panel{padding:22px;margin:18px 0}h2{font-size:22px;letter-spacing:-.6px;margin:0 0 15px}
+.row,.tabs{display:flex;gap:8px;flex-wrap:wrap}.row{align-items:center;justify-content:space-between;margin-bottom:14px}
+button{border:0}.pill{border-radius:22px;border:1px solid #d8e1ee;background:#f7f9fd;color:#364b69;padding:10px 15px}
+.pill.active{background:#183f73;border-color:#183f73;color:white}
+.search{border:1px solid #d8e1ee;border-radius:12px;padding:12px 14px;width:100%;margin:2px 0 15px;outline-color:#2f77b8}
+.athletes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.athlete{border:1px solid #e4ebf2;border-radius:14px;padding:13px;display:flex;align-items:center;gap:11px}
+.avatar{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#eaf4ff;color:#2762a1;font-weight:800}
+.athlete .info{flex:1;min-width:0}.athlete strong{display:block;font-size:15px}.athlete small{color:#718094;display:block;font-size:12px;margin-top:3px}
+.star{border-radius:11px;background:#f3f6fb;font-size:20px;width:37px;height:37px;color:#9daac0}.star.on{color:#e5a321;background:#fff3d6}
+.note{font-size:12px;color:#76869a;line-height:1.7;margin:12px 0 0}
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 20px}
+.day{border:1px solid #dce5ef;border-radius:12px;background:white;padding:12px 3px;text-align:center;font-weight:700}
+.day small{display:block;font-weight:400;color:#8797aa;font-size:10px;margin-bottom:5px}.day.active{background:#183f73;color:white}.day.active small{color:#b9d9f8}
+.event{border:1px solid #e4ebf2;border-radius:13px;padding:14px;margin:10px 0;display:flex;align-items:center;gap:14px}
+.number{width:53px;min-width:53px;text-align:center;background:#eef5fc;color:#245a96;border-radius:10px;padding:10px 4px;font-weight:850;font-size:14px}
+.number small{display:block;font-size:10px;font-weight:400}.event .detail{flex:1}.event strong{font-size:15px}.event .detail small{display:block;color:#738198;margin-top:4px}
+.tag{font-size:11px;padding:5px 8px;border-radius:30px;background:#fff2dc;color:#986010;white-space:nowrap}
+.subtle{background:#f3f7fc;color:#596d85;border-radius:12px;padding:14px;line-height:1.65;font-size:13px}
+.events-per{margin-top:10px;border-bottom:1px solid #e7edf4;padding:12px 0}.events-per strong{font-size:15px}.events-per p{font-size:13px;line-height:1.75;color:#566b82;margin:5px 0}.mode{margin:0 0 12px}
+footer{text-align:center;font-size:12px;color:#8090a4;padding:22px 15px}
+@media(max-width:600px){.panel{padding:16px}.stats{gap:7px}.stat{padding:14px 11px}.stat strong{font-size:23px}.days{gap:5px}.day{font-size:12px}.event{gap:9px;padding:11px}.number{width:42px;min-width:42px}}
+</style></head>
+<body>
+<header><div class="top"><span>2026 JECHEON CUP · SSC</span><a href="https://seoul-roller-jecheon-2026.astein.chatgpt.site" target="_blank" rel="noopener">기존 사이트 ↗</a></div>
+<h1>우리 팀 경기,<br><em>한눈에.</em></h1>
+<p>제2회 제천컵 롤러 종합선수권대회<br><strong>서울스포츠클럽 경기노트</strong></p>
+<p>10.30 금 — 11.02 월 · 제천실내롤러경기장</p></header>
+<main>
+<div class="stats"><div class="stat"><strong>10명</strong><span>함께 응원할 선수</span></div><div class="stat"><strong>4일</strong><span>대회 기간</span></div><div class="stat"><strong>2종</strong><span>트랙 / 로드</span></div></div>
+<section class="panel"><div class="row"><h2>선수 선택</h2><button id="reset" class="pill">선택 초기화</button></div>
+<input class="search" id="search" placeholder="⌕  선수 이름 검색" aria-label="선수 이름 검색">
+<div class="tabs" id="filter"><button class="pill active" data-filter="all">전체 선수</button><button class="pill" data-filter="star">☆ 관심 선수</button></div>
+<div class="athletes" id="athletes" style="margin-top:14px"></div>
+<p class="note">☆ 관심 선수는 이 기기에 저장됩니다. 선수를 누르면 아래에서 해당 선수의 종목을 볼 수 있습니다.</p></section>
+<section class="panel"><div class="row"><h2>경기 일정</h2><span class="tag">일정 검증 중</span></div>
+<div class="tabs mode" id="modes"><button class="pill active" data-mode="track">트랙</button><button class="pill" data-mode="road">로드</button></div>
+<div class="days" id="days"></div><div id="calendar"></div></section>
+<section class="panel"><h2>선수별 참가 종목</h2><div id="entries"></div><p class="note">참가 종목은 제공된 팀 명단을 기준으로 표시합니다. 실제 배정된 일자, 경기번호, 조 편성은 공식 대진표를 우선해 주세요.</p></section>
+<section class="panel"><h2>원본 대진표 안내</h2><div class="subtle">현재 이 복구판에는 원본 대진표 PDF 링크가 포함되지 않았습니다. 정확한 경기번호·일자·조 편성을 확인하려면 공식 원본을 대조해야 합니다. 이전에 확인된 10월 30일 트랙 경기번호 일부만 아래에 참고용으로 표시합니다. 이 페이지는 공식 경기 운영 안내가 아닙니다.</div></section>
+<footer>SEOUL SPORTS CLUB · ROLL TOGETHER, GROW TOGETHER.<br>팀 응원을 위한 비공식 경기노트 · 현장 공지 우선</footer>
+</main>
+<script>
+const players=[
+{id:'shin',name:'신의재',grade:'남 · 중3',track:['EP2,000m','1,000m','계주 2,000m'],road:['P3,000m','P3,000m (명단 중복 표기)','계주 3,000m']},
+{id:'baek',name:'백민혁',grade:'남 · 중2',track:['DTT200m','500m+D','계주 2,000m'],road:['100m','1LP','계주 3,000m']},
+{id:'seo',name:'김서후',grade:'남 · 중1',track:['EP2,000m','P3,000m','계주 2,000m'],road:['E3,000m','P3,000m','계주 3,000m']},
+{id:'ga',name:'김가현',grade:'여 · 중2',track:['EP2,000m','P3,000m'],road:['E3,000m','P3,000m']},
+{id:'jun',name:'이준수',grade:'남 · 초6 · B조',track:['500m+D','300m'],road:[]},
+{id:'nayeon',name:'김나연',grade:'여 · 초3 · B조',track:['800m','300m'],road:['1,000m','1LP']},
+{id:'eun',name:'양은우',grade:'여 · 초2 · B조',track:['400m+D','300m'],road:['100m','1LP']},
+{id:'jae',name:'송재이',grade:'여 · 초1 · B조',track:['200m','300m'],road:[]},
+{id:'ji',name:'이지수',grade:'여 · 초1 · B조',track:[],road:[]},
+{id:'hee',name:'이희륜',grade:'남 · 고3 · 중경고',track:[],road:[]}
+];
+const known=[{n:28,t:'남자 중등부 DTT200m 예선'},{n:31,t:'여자 중등부 EP2,000m 결승'},{n:32,t:'남자 중등부 EP2,000m 결승'},{n:38,t:'남자 중등부 DTT200m 결승'},{n:40,t:'남자 고등부 DTT200m 결승'}];
+let starred=[];try{starred=JSON.parse(localStorage.getItem('ssc261030-stars')||'[]')}catch(e){}
+let filter='all',query='',selected=null,mode='track',day=0;
+const $=s=>document.querySelector(s);
+function el(tag,cls,txt){const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n}
+function renderPlayers(){const root=$('#athletes');root.replaceChildren();const list=players.filter(p=>(filter==='all'||starred.includes(p.id))&&p.name.includes(query));if(!list.length)root.append(el('p','note','검색 결과가 없습니다.'));
+for(const p of list){const card=el('div','athlete');card.style.cursor='pointer';if(selected===p.id)card.style.borderColor='#2b75be';
+card.append(el('div','avatar',p.name.slice(-2)));const inf=el('div','info');inf.append(el('strong','',p.name),el('small','',p.grade));card.append(inf);
+const star=el('button','star'+(starred.includes(p.id)?' on':''),starred.includes(p.id)?'★':'☆');star.setAttribute('aria-label',p.name+' 관심 선수');
+star.onclick=e=>{e.stopPropagation();starred=starred.includes(p.id)?starred.filter(id=>id!==p.id):[...starred,p.id];localStorage.setItem('ssc261030-stars',JSON.stringify(starred));renderPlayers()};card.append(star);
+card.onclick=()=>{selected=selected===p.id?null:p.id;renderPlayers();renderEntries();$('#entries').scrollIntoView({behavior:'smooth',block:'nearest'})};root.append(card)}}
+function renderDays(){const root=$('#days');root.replaceChildren();['10.30 금','10.31 토','11.01 일','11.02 월'].forEach((d,i)=>{const btn=el('button','day'+(day===i?' active':''));btn.append(el('small','', 'DAY 0'+(i+1)),document.createTextNode(d));btn.onclick=()=>{day=i;renderDays();renderCalendar()};root.append(btn)})}
+function renderCalendar(){const root=$('#calendar');root.replaceChildren();if(mode==='track'&&day===0){root.append(el('p','note','10월 30일 · 기존 사이트에서 확인된 경기번호 (선수별 연결은 미검증)'));for(const k of known){const row=el('div','event');row.append(el('div','number',k.n+'번'));const body=el('div','detail');body.append(el('strong','',k.t),el('small','','원본 대진표 대조 필요'));row.append(body);root.append(row)}}
+else root.append(el('div','subtle',mode==='road'?'로드 종목별 경기일자와 경기번호는 원본 대진표 확인이 필요합니다.':'이 날짜의 경기번호·출전 선수 정보는 원본 대진표 확인이 필요합니다.'))}
+function renderEntries(){const root=$('#entries');root.replaceChildren();for(const p of players.filter(p=>!selected||p.id===selected)){const div=el('div','events-per');div.append(el('strong','',p.name+' · '+p.grade));div.append(el('p','', '트랙: '+(p.track.join(' · ')||'확인 필요')+'\n로드: '+(p.road.join(' · ')||'확인 필요')));div.lastChild.style.whiteSpace='pre-line';root.append(div)}}
+$('#search').addEventListener('input',e=>{query=e.target.value.trim();renderPlayers()});
+$('#reset').onclick=()=>{selected=null;query='';$('#search').value='';filter='all';$('#filter').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));renderPlayers();renderEntries()};
+$('#filter').onclick=e=>{const b=e.target.closest('button');if(!b)return;filter=b.dataset.filter;$('#filter').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderPlayers()};
+$('#modes').onclick=e=>{const b=e.target.closest('button');if(!b)return;mode=b.dataset.mode;$('#modes').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));renderCalendar()};
+renderPlayers();renderDays();renderCalendar();renderEntries();
+</script></body></html>
