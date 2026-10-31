@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
@@ -422,6 +423,30 @@ function renderApp(){
   el.innerHTML = c.map(x => `<div>${x}</div>`).join(""); el.hidden = false;
 })();
 renderTabs(); renderWho(); renderApp();
+</script>
+<script>
+/* 최신 버전 확인: 열려 있거나 복원된 페이지가 오래된 경우 자동 새로고침 */
+(function(){
+  var KEY='ssc-reloaded-at';
+  function check(){
+    try{
+      var last=+sessionStorage.getItem(KEY)||0;
+      if(Date.now()-last<30000)return;
+      fetch(location.pathname+'?_='+Date.now(),{cache:'no-store'})
+        .then(function(r){return r.text()})
+        .then(function(t){
+          var cur='<!DOCTYPE html>'+document.documentElement.outerHTML;
+          var m=function(x){var i=x.indexOf('"links"');return x.substr(i,4000)};
+          if(t.indexOf('"links"')>-1&&m(t)!==m(cur)){
+            sessionStorage.setItem(KEY,Date.now());
+            location.reload();
+          }
+        }).catch(function(){});
+    }catch(e){}
+  }
+  window.addEventListener('pageshow',check);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)check()});
+})();
 </script>
 </body>
 </html>
